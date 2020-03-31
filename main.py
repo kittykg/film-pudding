@@ -1,11 +1,8 @@
 import os
-from tmdb_api import TmdbApiWrapper
+from data_processor import DataProcessor
 
-API_KEY = os.environ['TMDB_API_KEY']
+API_KEY = os.environ["TMDB_API_KEY"]
 
-taw = TmdbApiWrapper(API_KEY)
-
-g, c = taw.get_film_details("RoboCop", "2014")
-
-print(g)
-print(c)
+dp = DataProcessor(API_KEY, "test.csv")
+data = dp.processe_data()
+dp.write_to_file(data)

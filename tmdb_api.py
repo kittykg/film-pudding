@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime
 
+
 class TmdbApiWrapper:
     def __init__(self, api_key):
         self.api_key = api_key
@@ -18,30 +19,26 @@ class TmdbApiWrapper:
 
         r = requests.get(url, PARAMS).json()["results"]
 
-        if len(r) > 1:
-            for f in r:
-                title = f["title"]
-                release_year = datetime.strptime(
-                    f["release_date"], "%Y-%m-%d").year
-                if title == film_name and release_year == int(film_year):
-                    return f["id"]
+        if len(r) == 0:
+            print(film_name)
             return None
-        else:
-            return r[0]["id"]
 
-    def _get_film_genres(self, id):
+        return r[0]["id"]
+
+    def _get_film_detail(self, id):
         api_path = F"/movie/{id}"
         url = self.base_URL + api_path
 
         PARAMS = {"api_key": self.api_key}
 
-        genres = requests.get(url, PARAMS).json()["genres"]
+        r = requests.get(url, PARAMS).json()
 
-        g_ids = []
-        for g in genres:
-            g_ids.append(g["id"])
+        genres = [g["name"] for g in r["genres"]]
+        runtime = r["runtime"]
+        popularity = r["popularity"]
+        vote_avg = r["vote_average"]
 
-        return g_ids
+        return [genres, runtime, popularity, vote_avg]
 
     def _get_film_cast(self, id):
         api_path = F"/movie/{id}/credits"
@@ -62,9 +59,22 @@ class TmdbApiWrapper:
         id = self._get_film_id(film_name, film_year)
 
         if id == None:
+            print(film_name)
             return None
 
-        genres = self._get_film_genres(id)
+        d = self._get_film_detail(id)
         cast = self._get_film_cast(id)
 
-        return genres, cast
+        details = d.copy()
+        details.append(cast)
+
+        return details
+
+    def get_all_genres(self):
+        api_path = "/genre/movie/list"
+        url = self.base_URL + api_path
+
+        PARAMS = {"api_key": self.api_key}
+
+        genres = requests.get(url, PARAMS).json()["genres"]
+        return [g["name"] for g in genres]
