@@ -20,7 +20,6 @@ class TmdbApiWrapper:
         r = requests.get(url, PARAMS).json()["results"]
 
         if len(r) == 0:
-            print(film_name)
             return None
 
         return r[0]["id"]
@@ -56,6 +55,7 @@ class TmdbApiWrapper:
         return cast_names
 
     def get_film_details(self, film_name, film_year):
+        print(film_name)
         id = self._get_film_id(film_name, film_year)
 
         if id == None:
@@ -64,6 +64,10 @@ class TmdbApiWrapper:
 
         d = self._get_film_detail(id)
         cast = self._get_film_cast(id)
+
+        if len(d[0]) == 0:
+            print(F"{film_name} has no genres")
+            return None
 
         details = d.copy()
         details.append(cast)

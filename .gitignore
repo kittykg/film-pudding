@@ -1,3 +1,9 @@
+# Files that should exist only locally
+fav_cast.txt
+ratings.csv
+collected_data.npy
+processed_data.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
