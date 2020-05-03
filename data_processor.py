@@ -1,7 +1,6 @@
-import csv
 import numpy as np
-from sklearn.preprocessing import LabelBinarizer
 
+from encoding_utils import genre_encode, cast_encode
 from tmdb_api import TmdbApiWrapper
 
 
@@ -13,19 +12,6 @@ class DataProcessor:
         self.film_data = np.load(file_name, allow_pickle=True)
         self.taw = TmdbApiWrapper(api_key)
 
-    def _genre_encode(self, data):
-        all_genres = self.taw.get_all_genres()
-        lb = LabelBinarizer()
-        lb.fit(all_genres)
-        for i, d in enumerate(data):
-            if len(d) == 0:
-                print(F"rip {i}")
-        return [np.sum(lb.transform(d), axis=0) for d in data]
-
-    def _cast_encode(self, data):
-        favs = open('fav_cast.txt', 'r').read().splitlines()
-        return [float(d in favs) for d in data]
-
     def process_data(self):
         columns = self.film_data.T
         encoded_x = []
@@ -34,10 +20,10 @@ class DataProcessor:
             c = columns[i]
             # Genres
             if i == 1:
-                encoded_x.append(self._genre_encode(c))
+                encoded_x.append(genre_encode(c))
             # Cast
             elif i == 5:
-                encoded_x.append(self._cast_encode(c))
+                encoded_x.append(cast_encode(c))
             elif i == 6:
                 continue
             else:

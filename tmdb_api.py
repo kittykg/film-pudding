@@ -56,14 +56,14 @@ class TmdbApiWrapper:
 
     def get_film_details(self, film_name, film_year):
         print(film_name)
-        id = self._get_film_id(film_name, film_year)
+        tmdb_id = self._get_film_id(film_name, film_year)
 
-        if id == None:
+        if tmdb_id is None:
             print(film_name)
             return None
 
-        d = self._get_film_detail(id)
-        cast = self._get_film_cast(id)
+        d = self._get_film_detail(tmdb_id)
+        cast = self._get_film_cast(tmdb_id)
 
         if len(d[0]) == 0:
             print(F"{film_name} has no genres")

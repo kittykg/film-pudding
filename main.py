@@ -1,8 +1,10 @@
+import numpy as np
+from random import shuffle
+
 from data_collector import DataCollector
 from data_processor import DataProcessor
 from model import FilmPuddingModel
-import numpy as np
-from random import shuffle
+from single_data_processor import SingleDataProcessor
 
 with open("secert_key", "r") as sk:
     API_KEY = sk.readline().splitlines().pop()
@@ -45,12 +47,18 @@ val_y = np.array(val_y)
 test_x = np.array(test_x)
 test_y = np.array(test_y)
 
-print("Datasets for training, validation and testing are ready...")
+print("Datasets for training, validation and testing are ready...\n")
 
 fpm = FilmPuddingModel()
 
 fpm.fit(train_x, train_y, val_x, val_y)
 
-print("Training done...")
+print("Training done...\n")
 
+print("Evaluation:")
 fpm.evaluate(test_x, test_y)
+
+print("\nMy own try")
+my_x = SingleDataProcessor(API_KEY).film_to_input("RoboCop", "2014")
+pred = fpm.predict(my_x)
+print(F"{pred}       {pred * 5}")

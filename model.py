@@ -110,5 +110,4 @@ class FilmPuddingModel:
 
     def evaluate(self, x, y_real):
         prediction = self.predict(x)
-        print(x)
         print(F"MSE: {mean_squared_error(y_real, prediction)}")
