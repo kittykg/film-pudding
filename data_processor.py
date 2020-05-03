@@ -15,7 +15,6 @@ class DataProcessor:
 
     def _genre_encode(self, data):
         all_genres = self.taw.get_all_genres()
-        print(all_genres)
         lb = LabelBinarizer()
         lb.fit(all_genres)
         for i, d in enumerate(data):
@@ -27,32 +26,29 @@ class DataProcessor:
         favs = open('fav_cast.txt', 'r').read().splitlines()
         return [float(d in favs) for d in data]
 
-    def _encode_data(self):
+    def process_data(self):
         columns = self.film_data.T
-        encoded_columns = []
+        encoded_x = []
+        normalised_y = columns[6].astype('float') / 5
         for i in range(len(columns)):
             c = columns[i]
             # Genres
             if i == 1:
-                encoded_columns.append(self._genre_encode(c))
+                encoded_x.append(self._genre_encode(c))
             # Cast
             elif i == 5:
-                encoded_columns.append(self._cast_encode(c))
+                encoded_x.append(self._cast_encode(c))
+            elif i == 6:
+                continue
             else:
-                encoded_columns.append(c)
-        encoded_data = np.array(encoded_columns).T
+                encoded_x.append(c)
+        encoded_data = np.array(encoded_x).T
 
-        result = []
+        final_x = []
         for d in encoded_data:
             list_d = list(d)
             new_d = [list_d[0]] + list(list_d[1]) + list_d[2:]
             new_d = [float(i) for i in new_d]
-            result.append(new_d)
+            final_x.append(new_d)
 
-        return np.array(result)
-
-    def process_data(self):
-        return self._encode_data()
-
-    def write_to_file(self, data):
-        np.savetxt("processed_data.csv", data, delimiter=",", newline="\n")
+        return np.array(final_x), normalised_y

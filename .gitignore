@@ -3,6 +3,7 @@ fav_cast.txt
 ratings.csv
 collected_data.npy
 processed_data.csv
+secert_key
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -11,6 +12,7 @@ __pycache__/
 
 # IDE
 .vscode
+.idea
 
 # C extensions
 *.so

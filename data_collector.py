@@ -20,7 +20,7 @@ class DataCollector:
         for n_y_r in self.n_y_r_list:
             n, y, r = n_y_r
             details = self.taw.get_film_details(n, y)
-            if details == None:
+            if details is None:
                 continue
             new_data = [y] + details + [r]
             film_data.append(new_data)
