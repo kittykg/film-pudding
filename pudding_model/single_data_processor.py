@@ -1,15 +1,18 @@
 import numpy as np
 
-from pudding_model.encoding_utils import genre_encode_one, cast_encode_one
-from pudding_model.tmdb_api import TmdbApiWrapper
+from .encoding_utils import genre_encode_one, cast_encode_one
+from .tmdb_api import TmdbApiWrapper
 
 
 # Data format
 # [year,  genres,   runtime, popularity, vote_avg, cast,  myrating]
 #  float, special,  float,   float,      float,    float, float
 class SingleDataProcessor:
-    def __init__(self, api_key):
-        self.taw = TmdbApiWrapper(api_key)
+    def __init__(self):
+        with open("pudding_model/secret_key", "r") as sk:
+            API_KEY = sk.readline().splitlines().pop()
+        sk.close()
+        self.taw = TmdbApiWrapper(API_KEY)
 
     def film_to_input(self, film_name, film_year):
         assert len(film_name) > 0

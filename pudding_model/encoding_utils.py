@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer
 
-from pudding_model.tmdb_api import TmdbApiWrapper
+from .tmdb_api import TmdbApiWrapper
 
 with open("pudding_model/secret_key", "r") as sk:
     API_KEY = sk.readline().splitlines().pop()

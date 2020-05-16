@@ -1,7 +1,7 @@
 import csv
 import numpy as np
 
-from pudding_model.tmdb_api import TmdbApiWrapper
+from .tmdb_api import TmdbApiWrapper
 
 
 # Data format
