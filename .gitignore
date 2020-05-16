@@ -1,9 +1,9 @@
 # Files that should exist only locally
-fav_cast.txt
-ratings.csv
-collected_data.npy
-processed_data.csv
-secert_key
+pudding_model/fav_cast.txt
+pudding_model/ratings.csv
+pudding_model/collected_data.npy
+pudding_model/processed_data.csv
+pudding_model/secret_key
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -134,3 +134,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# macOS stuff
+.DS_Store

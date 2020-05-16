@@ -1,9 +1,9 @@
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer
 
-from tmdb_api import TmdbApiWrapper
+from pudding_model.tmdb_api import TmdbApiWrapper
 
-with open("secert_key", "r") as sk:
+with open("pudding_model/secret_key", "r") as sk:
     API_KEY = sk.readline().splitlines().pop()
 sk.close()
 
@@ -25,7 +25,7 @@ def genre_encode_one(data):
 
 
 def cast_encode(data):
-    with open('fav_cast.txt', 'r') as fav_cast:
+    with open('pudding_model/fav_cast.txt', 'r') as fav_cast:
         favs = fav_cast.read().splitlines()
         encoding = [float(len(list(filter(lambda a: a in favs, d))))
                     for d in data]
@@ -34,7 +34,7 @@ def cast_encode(data):
 
 
 def cast_encode_one(data):
-    with open('fav_cast.txt', 'r') as fav_cast:
+    with open('pudding_model/fav_cast.txt', 'r') as fav_cast:
         favs = fav_cast.read().splitlines()
         encoding = float(len(list(filter(lambda a: a in favs, data))))
     fav_cast.close()

@@ -1,7 +1,7 @@
 import numpy as np
 
-from encoding_utils import genre_encode_one, cast_encode_one
-from tmdb_api import TmdbApiWrapper
+from pudding_model.encoding_utils import genre_encode_one, cast_encode_one
+from pudding_model.tmdb_api import TmdbApiWrapper
 
 
 # Data format

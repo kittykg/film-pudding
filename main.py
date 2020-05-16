@@ -1,19 +1,18 @@
 import numpy as np
 from random import shuffle
 
-from data_collector import DataCollector
-from data_processor import DataProcessor
-from model import FilmPuddingModel
-from single_data_processor import SingleDataProcessor
+from pudding_model.data_processor import DataProcessor
+from pudding_model.model import FilmPuddingModel
+from pudding_model.single_data_processor import SingleDataProcessor
 
-with open("secert_key", "r") as sk:
+with open("pudding_model/secret_key", "r") as sk:
     API_KEY = sk.readline().splitlines().pop()
 sk.close()
 
 # dc = DataCollector(API_KEY, "ratings.csv")
 # dc.collect("collected_data")
 
-dp = DataProcessor(API_KEY, "collected_data.npy")
+dp = DataProcessor(API_KEY, "pudding_model/collected_data.npy")
 x, y = dp.process_data()
 
 assert x.shape[0] == y.shape[0]
