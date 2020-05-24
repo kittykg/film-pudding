@@ -41,3 +41,9 @@ There are in total 24 input features and 1 output
 *  fav_cast.txt
 *  rating.csv
 *  secret_key
+
+## How to run the server
+
+Run as DEV mode with hot-reloading:
+
+`FLASK_ENV=dev FLASK_APP=pudding_server.py FLASK_DEBUG=True flask run`

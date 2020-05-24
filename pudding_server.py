@@ -18,7 +18,7 @@ def hello_pudding():
 
 
 @app.errorhandler(404)
-@app.route('/', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     json = request.get_json()
     if json is None:
