@@ -5,3 +5,4 @@ gunicorn
 sklearn
 scikit-learn
 requests
+flask_cors
