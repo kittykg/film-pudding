@@ -6,6 +6,8 @@ My taste of films is weird, so can ML predict if I'm going to like a flim or not
 
 All the ratings are from my Letterboxd. And the details are from TMDB.
 
+Follow me on [Letterboxd](https://letterboxd.com/KittyG/) :P 
+
 ## Data Format
 
 There are in total 24 input features and 1 output
@@ -47,3 +49,7 @@ There are in total 24 input features and 1 output
 Run as DEV mode with hot-reloading:
 
 `FLASK_ENV=dev FLASK_APP=pudding_server.py FLASK_DEBUG=True flask run`
+
+Run with Gunicorn (change the IP if you want):
+
+`gunicorn pudding_server:app --bind 0.0.0.0:5000`

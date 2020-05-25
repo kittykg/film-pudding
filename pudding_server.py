@@ -1,12 +1,14 @@
 from flask import Flask, request, abort, jsonify
 
-from .pudding_model.single_data_processor import SingleDataProcessor
-from .pudding_model.trainer import Trainer
+from pudding_model.single_data_processor import SingleDataProcessor
+from pudding_model.trainer import Trainer
 
 fpm = Trainer().train_model()
 sdp = SingleDataProcessor()
 
 app = Flask(__name__)
+
+print("Server is up")
 
 
 @app.route('/health-probe')
