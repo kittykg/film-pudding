@@ -2,3 +2,6 @@ numpy
 torch
 flask
 gunicorn
+sklearn
+scikit-learn
+requests
