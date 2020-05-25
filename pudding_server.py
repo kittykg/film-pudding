@@ -11,10 +11,15 @@ app = Flask(__name__)
 print("Server is up")
 
 
+@app.route('/')
+def welcome():
+    return 'Hello from Pudding!'
+
+
 @app.route('/health-probe')
-def hello_pudding():
+def healthy_pudding():
     if fpm is not None:
-        return 'Hello from pudding!'
+        return 'Pudding is good to go!'
     else:
         return 'Pudding is not ready! ://'
 
