@@ -1,5 +1,8 @@
 # Film Pudding
 
+![kittykg](https://circleci.com/gh/kittykg/film-pudding.svg?style=svg
+)
+
 My taste of films is weird, so can ML predict if I'm going to like a flim or not?
 
 ## Data Source
